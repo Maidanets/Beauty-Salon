@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Services</title>
+</head>
+<body>
+
+{% for service in services %}
+    <a href="/vacancy/{{ service.name_service }}/" class="link"><h2>{{ service.name_service }}</h2></a>
+    <p><span>Time:</span> {{ service.time_service }}<span> min.</span></p>
+    <p><span>Price:</span> {{ service.price_service }}<span> UAN</span></p>
+{% endfor %}
+
+</body>
+</html>
+/html>
