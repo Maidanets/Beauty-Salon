@@ -46,5 +46,17 @@ def specialist_id(request, id_specialist):
     return HttpResponse(f"Specialist id = {id_specialist}")
 
 
-def booking(request, id_service, id_specialist, data, time):
-    return HttpResponse("Booking")
+def booking(request):
+    if request.method == "POST":
+        booking_user = Booking(
+            client_name=request.POST['client_name'],
+            client_phone=request.POST['client_phone'],
+            date_time=request.POST['date_time'],
+            start_time=request.POST['start_time'],
+            master_id_id=request.POST['master_id_id'],
+            services_id_id=request.POST['services_id_id']
+        )
+        booking_user.save()
+    master = Master.objects.all()
+    service = Services.objects.all()
+    return render(request, "booking.html", {'master': master, 'service': service})
