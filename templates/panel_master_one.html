@@ -1,10 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Panel Master</title>
 </head>
 <body>
-$END$
+
+<h1>Panel Master</h1>
+    <form method="POST">
+        {% csrf_token %}
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" placeholder="Enter date" required>
+
+      <label for="start_work">Time:</label>
+      <input type="time" id="start_work" name="start_work" placeholder="Enter start time" required>
+
+      <label for="end_work">Login:</label>
+      <input type="time" id="end_work" name="end_work" placeholder="Enter end time" required>
+
+      <input type="submit" value="Save">
+    </form>
+
+{% for schedule in work_schedule %}
+    <p><span>Date:</span> {{ schedule.date.date }} <span>Start:</span> {{ schedule.start_work }}<span>End:</span> {{ schedule.end_work }}</p>
+{% endfor %}
+
+
 </body>
 </html>

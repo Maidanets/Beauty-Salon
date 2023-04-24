@@ -1,10 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Panel Masters</title>
 </head>
 <body>
-$END$
+
+<h1>Panel Masters</h1>
+    <form action="/panel/masters/"  method="POST">
+        {% csrf_token %}
+      <label for="name_master">Name master:</label>
+        <input type="text" id="name_master" name="name_master" placeholder="Enter master name" required>
+
+      <label for="phone_master">Phone master:</label>
+        <input type="text" id="phone_master" name="phone_master" placeholder="Enter phone" required>
+
+        <label for="services_master">Services master:</label>
+        {% for service in services  %}
+          <input type="checkbox" id="services_master" name="services_master_{{ service.id }}" value="{{ service.id }}">{{ service.name_service }}
+        {% endfor %}
+
+      <label for="rank_master">Rank master:</label>
+        <select name="rank_master" id="rank_master" required>
+            <option value="1">Beginner</option>
+            <option value="2">Middle</option>
+            <option value="3">Specialist</option>
+            <option value="4">Expert</option>
+        </select>
+
+      <label for="statys_master">Statys master:</label>
+        <select name="statys_master" id="statys_master" required>
+            <option value="1">Working</option>
+            <option value="0">Doesn't work</option>
+        </select>
+
+      <input type="submit" value="Save">
+    </form>
+
+{% for master in masters %}
+    <a href="/panel/masters/{{ master.id }}/" class="link"><h2>{{ master.name_master }}</h2></a>
+    <p><span>Phone:</span> {{ master.phone_master }}</p>
+    <p><span>Rank:</span> {{ master.rank_master }}</p>
+    {% for service in master.services_master.all %}
+        <p><span>Service:</span> {{ service.name_service }}</p>
+    {% endfor %}
+{% endfor %}
+
 </body>
 </html>

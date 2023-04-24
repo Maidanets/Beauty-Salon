@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Panel Services</title>
 </head>
 <body>
-$END$
+
+<h1>Panel Services</h1>
+    <form action="/panel/services/"  method="POST">
+        {% csrf_token %}
+      <label for="name_service">Name service:</label>
+      <input type="text" id="name_service" name="name_service" placeholder="Enter service name" required>
+
+      <label for="time_service">Time:</label>
+      <input type="text" id="time_service" name="time_service" placeholder="Enter time" required>
+
+      <label for="price_service">Login:</label>
+      <input type="text" id="price_service" name="price_service" placeholder="Enter price" required>
+
+      <input type="submit" value="Save">
+    </form>
+
+{% for service in services %}
+    <a href="/panel/services/{{ service.name_service }}/" class="link"><h2>{{ service.name_service }}</h2></a>
+    <p><span>Time:</span> {{ service.time_service }}<span> min.</span></p>
+    <p><span>Price:</span> {{ service.price_service }}<span> UAN</span></p>
+{% endfor %}
+
 </body>
 </html>

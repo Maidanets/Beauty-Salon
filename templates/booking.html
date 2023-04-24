@@ -1,10 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Booking</title>
 </head>
 <body>
-$END$
+
+<h1>Booking</h1>
+    <form action="/salon/booking/"  method="POST">
+        {% csrf_token %}
+      <label for="client_name">Name:</label>
+        <input type="text" id="client_name" name="client_name" placeholder="Enter name" required>
+
+      <label for="client_phone">Phone:</label>
+        <input type="text" id="client_phone" name="client_phone" placeholder="Enter phone" required>
+
+      <label for="date_time">Date:</label>
+        <input type="date" id="date_time" name="date_time"  required>
+
+      <label for="start_time">Time:</label>
+        <input type="time" id="start_time" name="start_time"  required>
+
+      <label for="master_id_id">Master:</label>
+        <select name="master_id_id" id="master_id_id" required>
+            {% for onemaster in master  %}
+                <option value="{{ onemaster.id }}">{{ onemaster.name_master }}</option>
+            {% endfor %}
+        </select>
+
+          <label for="services_id_id">Service:</label>
+        <select name="services_id_id" id="services_id_id" required>
+            {% for oneservice in service  %}
+                <option value="{{ oneservice.id }}">{{ oneservice.name_service }}</option>
+            {% endfor %}
+        </select>
+
+      <input type="submit" value="Booking">
+    </form>
+
 </body>
 </html>
